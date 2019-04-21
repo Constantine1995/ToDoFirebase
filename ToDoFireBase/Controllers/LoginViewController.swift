@@ -11,6 +11,7 @@ import Firebase
 class LoginViewController: UIViewController {
 
     let segueIdentifier = "tasksSegue"
+    var ref: DatabaseReference!
     
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -18,6 +19,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference(withPath: "users")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(kbDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         warningLabel.alpha = 0
@@ -82,13 +86,15 @@ class LoginViewController: UIViewController {
             displayWarningLabel(widthText: "Info is Incorrect")
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+       
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
            
-            guard let authResult = authResult, error == nil else {
+            guard error == nil, user != nil else {
                 print(error!.localizedDescription)
                 return
             }
-                print("\(authResult.user.email!) created")
+            let userRef = self?.ref.child((user?.user.uid)!)
+            userRef?.setValue(["email": user?.user.email])
         }
     }
 }

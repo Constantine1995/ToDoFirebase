@@ -14,6 +14,8 @@
 		0407B790226B6D12001F92AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0407B78E226B6D12001F92AC /* LaunchScreen.storyboard */; };
 		0407B798226B76A7001F92AC /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407B797226B76A7001F92AC /* TaskViewController.swift */; };
 		0407B79C226B7AF2001F92AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0407B79B226B7AF2001F92AC /* GoogleService-Info.plist */; };
+		044F8B80226C7E2600A4454A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F8B7F226C7E2600A4454A /* Task.swift */; };
+		044F8B88226C87FC00A4454A /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F8B87226C87FC00A4454A /* Users.swift */; };
 		12F84D93E5A823A170600CE0 /* Pods_ToDoFireBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF94B82C8BB3781ED0BAC8E3 /* Pods_ToDoFireBase.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		0407B791226B6D12001F92AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0407B797226B76A7001F92AC /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		0407B79B226B7AF2001F92AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		044F8B7F226C7E2600A4454A /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		044F8B87226C87FC00A4454A /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Users.swift; path = /Users/mac/IOS/ToDoFireBase/ToDoFireBase/Models/Users.swift; sourceTree = "<absolute>"; };
 		88A2E467BA39035B9690CC56 /* Pods-ToDoFireBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoFireBase.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoFireBase/Pods-ToDoFireBase.debug.xcconfig"; sourceTree = "<group>"; };
 		BF94B82C8BB3781ED0BAC8E3 /* Pods_ToDoFireBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoFireBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E85D0C996AF005499A833DD1 /* Pods-ToDoFireBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoFireBase.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToDoFireBase/Pods-ToDoFireBase.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,8 +71,10 @@
 			children = (
 				0407B791226B6D12001F92AC /* Info.plist */,
 				0407B79B226B7AF2001F92AC /* GoogleService-Info.plist */,
-				0407B79A226B76F3001F92AC /* Supporting files */,
+				044F8B85226C7E4400A4454A /* Models */,
+				044F8B86226C7E6600A4454A /* View */,
 				0407B799226B76CD001F92AC /* Controllers */,
+				0407B79A226B76F3001F92AC /* Supporting files */,
 			);
 			path = ToDoFireBase;
 			sourceTree = "<group>";
@@ -86,11 +92,27 @@
 			isa = PBXGroup;
 			children = (
 				0407B782226B6D10001F92AC /* AppDelegate.swift */,
-				0407B786226B6D10001F92AC /* Main.storyboard */,
 				0407B78C226B6D12001F92AC /* Assets.xcassets */,
-				0407B78E226B6D12001F92AC /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		044F8B85226C7E4400A4454A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				044F8B87226C87FC00A4454A /* Users.swift */,
+				044F8B7F226C7E2600A4454A /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		044F8B86226C7E6600A4454A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0407B786226B6D10001F92AC /* Main.storyboard */,
+				0407B78E226B6D12001F92AC /* LaunchScreen.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2D9735EA7D17404317C1EF3E /* Frameworks */ = {
@@ -237,8 +259,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044F8B80226C7E2600A4454A /* Task.swift in Sources */,
 				0407B785226B6D10001F92AC /* LoginViewController.swift in Sources */,
 				0407B798226B76A7001F92AC /* TaskViewController.swift in Sources */,
+				044F8B88226C87FC00A4454A /* Users.swift in Sources */,
 				0407B783226B6D10001F92AC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
