@@ -141,9 +141,9 @@ extension LoginViewController: GIDSignInDelegate {
             
             guard let uid = result?.user.uid else { return }
             guard let email = result?.user.email else { return }
-            guard (result?.user.displayName) != nil else { return }
+            guard let username = result?.user.displayName else { return }
             let userRef = self?.ref.child(uid)
-            userRef?.updateChildValues(["email": email])
+            userRef?.updateChildValues(["email": email, "username": username])
             self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
             print("Sign in with Google")
         }
