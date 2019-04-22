@@ -15,7 +15,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     var task = Array<Task>()
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +38,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             self?.tableView.reloadData()
         }
     }
-
+    
     // Removing all observers after them loading
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -60,16 +60,46 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         return task.count
     }
     
+    // MARK: cellForRowAt
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let tasks = task[indexPath.row]
+        let isCompleted = tasks.completed
+        let taskTitle = tasks.title
         cell.backgroundColor = .clear
         cell.textLabel?.textColor = .white
-        let taskTitle = task[indexPath.row].title
         cell.textLabel?.text = taskTitle
+        toggleCompletion(cell, isCompleted: isCompleted)
         return cell
     }
     
-    //Write data to Firebase
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // Remove value from cell-task
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let tasks = task[indexPath.row]
+            tasks.ref?.removeValue()
+        }
+    }
+    
+    // Write checkmark to firebase in task
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        let tasks = task[indexPath.row]
+        let isCompleted = !tasks.completed
+        toggleCompletion(cell, isCompleted: isCompleted)
+        tasks.ref?.updateChildValues(["completed" : isCompleted])
+    }
+    
+    // Set accesoryType
+    func toggleCompletion(_ cell: UITableViewCell, isCompleted: Bool) {
+        cell.accessoryType = isCompleted ? .checkmark : .none
+    }
+    
+    // Write data to Firebase
     @IBAction func addTaped(_ sender: Any) {
         let alertController = UIAlertController(title: "New Task", message: "Add new task", preferredStyle: .alert)
         alertController.addTextField()
