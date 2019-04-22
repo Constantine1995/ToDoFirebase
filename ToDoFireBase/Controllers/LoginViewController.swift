@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 class LoginViewController: UIViewController {
-
+    
     let segueIdentifier = "tasksSegue"
     var ref: DatabaseReference!
     
@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         warningLabel.alpha = 0
         
+        
+        // If we are logged in, we switch to task view
         Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if user != nil {
                 self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
@@ -33,6 +35,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Clear fields
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         emailTextField.text = ""
@@ -43,16 +46,16 @@ class LoginViewController: UIViewController {
         guard let userInfo = notifcation.userInfo else { return }
         let kbFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height + kbFrameSize.height)
-         (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrameSize.height, right: 0)
+        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbFrameSize.height, right: 0)
     }
     
     @objc func kbDidHide() {
         (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
-
+        
     }
     
+    // Display text of warning with animation
     func displayWarningLabel(widthText text: String) {
-        
         warningLabel.text = text
         UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [.curveEaseOut], animations: { [weak self] in
             self?.warningLabel.alpha = 1
@@ -61,12 +64,13 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Login
     @IBAction func loginTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
             displayWarningLabel(widthText: "Info is Incorrect")
             return
         }
-        
+        // Auth with email and password
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
             if error != nil {
                 self?.displayWarningLabel(widthText: "Error occured")
@@ -81,18 +85,20 @@ class LoginViewController: UIViewController {
         
     }
     
+    // Register new user
     @IBAction func registerTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
             displayWarningLabel(widthText: "Info is Incorrect")
             return
         }
-       
+        // Create new user
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
-           
+            
             guard error == nil, user != nil else {
                 print(error!.localizedDescription)
                 return
             }
+            //Write data of email in the user.uid
             let userRef = self?.ref.child((user?.user.uid)!)
             userRef?.setValue(["email": user?.user.email])
         }

@@ -21,9 +21,31 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         guard let currentUser = Auth.auth().currentUser else { return }
         user = Users(user: currentUser)
+        // Getting the base reference to get to the children
         ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
     }
     
+    // Get data from Firebase
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ref.observe(.value) { [weak self] snapshot in
+            var _tasks = Array<Task>()
+            for item in snapshot.children {
+                let task = Task(snapshot: item as! DataSnapshot)
+                _tasks.append(task)
+            }
+            self?.task = _tasks
+            self?.tableView.reloadData()
+        }
+    }
+
+    // Removing all observers after them loading
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ref.removeAllObservers()
+    }
+    
+    // SignOut from account
     @IBAction func signOutTapped(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
@@ -31,23 +53,23 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         catch {
             print(error.localizedDescription)
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 
+        return task.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .clear
-        cell.textLabel?.text = "This is cell number \(indexPath.row)"
         cell.textLabel?.textColor = .white
+        let taskTitle = task[indexPath.row].title
+        cell.textLabel?.text = taskTitle
         return cell
     }
     
-    
+    //Write data to Firebase
     @IBAction func addTaped(_ sender: Any) {
         let alertController = UIAlertController(title: "New Task", message: "Add new task", preferredStyle: .alert)
         alertController.addTextField()
@@ -63,18 +85,5 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         alertController.addAction(save)
         
         present(alertController, animated: true, completion: nil)
-    }
-    
-  
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    }    
 }
