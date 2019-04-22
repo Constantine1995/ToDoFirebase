@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
+
 class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var user: Users!
@@ -47,11 +49,12 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // SignOut from account
     @IBAction func signOutTapped(_ sender: UIBarButtonItem) {
+        let firebaseAuth = Auth.auth()
         do {
-            try Auth.auth().signOut()
-        }
-        catch {
-            print(error.localizedDescription)
+            try firebaseAuth.signOut()
+            GIDSignIn.sharedInstance()?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
         }
         dismiss(animated: true, completion: nil)
     }

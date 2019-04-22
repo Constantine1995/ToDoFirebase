@@ -19,27 +19,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="wwI-0A-LjY">
-                                <rect key="frame" x="40" y="228" width="295" height="366"/>
+                                <rect key="frame" x="40" y="223" width="295" height="376"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="lpG-l2-h5L">
-                                        <rect key="frame" x="30.333333333333329" y="0.0" width="234.33333333333337" height="108"/>
+                                        <rect key="frame" x="55.666666666666686" y="0.0" width="184" height="108"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDoFireBase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="688-t2-6kN">
-                                                <rect key="frame" x="0.0" y="0.0" width="234.33333333333334" height="42.333333333333336"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDo List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="688-t2-6kN">
+                                                <rect key="frame" x="13.333333333333329" y="0.0" width="157.33333333333337" height="42.333333333333336"/>
                                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="38"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User does not exist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Af5-v6-YoI">
-                                                <rect key="frame" x="25.333333333333343" y="82.333333333333314" width="184" height="25.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="82.333333333333314" width="184" height="25.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="23"/>
                                                 <color key="textColor" red="1" green="0.22250897006871706" blue="0.11698375609484901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Pj-ih-bxF">
-                                        <rect key="frame" x="0.0" y="158" width="295" height="70"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8Pj-ih-bxF">
+                                        <rect key="frame" x="0.0" y="158" width="295" height="80"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iwo-5o-Wun">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="30"/>
@@ -48,7 +48,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T0N-57-hLr">
-                                                <rect key="frame" x="0.0" y="40" width="295" height="30"/>
+                                                <rect key="frame" x="0.0" y="50" width="295" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -62,13 +62,13 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cnW-me-UXU">
-                                        <rect key="frame" x="40" y="278" width="215" height="88"/>
+                                        <rect key="frame" x="40" y="288" width="215" height="88"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dr0-Hw-di5">
                                                 <rect key="frame" x="0.0" y="0.0" width="215" height="37"/>
                                                 <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="22"/>
-                                                <state key="normal" title="Login">
+                                                <state key="normal" title="Log in">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -102,12 +102,26 @@
                                     <constraint firstItem="cnW-me-UXU" firstAttribute="leading" secondItem="wwI-0A-LjY" secondAttribute="leading" constant="40" id="q6M-h8-ayI"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjd-mA-5Ut">
+                                <rect key="frame" x="78" y="632" width="219" height="37"/>
+                                <color key="backgroundColor" red="1" green="0.22250897010000001" blue="0.1169837561" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="22"/>
+                                <state key="normal" title="Sign in with Google">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="googleSignInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GXK-MU-mBJ"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.25536705919228847" green="0.77965470549768456" blue="0.81715973984771573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.30588235294117649" green="0.58431372549019611" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="vjd-mA-5Ut" firstAttribute="top" secondItem="wwI-0A-LjY" secondAttribute="bottom" constant="33" id="EiC-jl-uUu"/>
+                            <constraint firstItem="vjd-mA-5Ut" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="78" id="GYG-Zz-ZOI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wwI-0A-LjY" secondAttribute="trailing" constant="40" id="HO8-hy-1gM"/>
                             <constraint firstItem="wwI-0A-LjY" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="SPQ-1U-bYi"/>
                             <constraint firstItem="wwI-0A-LjY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="UOp-pj-z3Z"/>
+                            <constraint firstItem="vjd-mA-5Ut" firstAttribute="centerX" secondItem="wwI-0A-LjY" secondAttribute="centerX" id="d8D-AK-pXU"/>
                             <constraint firstItem="wwI-0A-LjY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="nnH-Cp-nV2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

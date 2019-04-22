@@ -8,7 +8,9 @@
 
 import UIKit
 import Firebase
-class LoginViewController: UIViewController {
+import GoogleSignIn
+
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
     
     let segueIdentifier = "tasksSegue"
     var ref: DatabaseReference!
@@ -26,7 +28,6 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(kbDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         warningLabel.alpha = 0
         
-        
         // If we are logged in, we switch to task view
         Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if user != nil {
@@ -35,9 +36,14 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // Clear fields
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        GIDSignIn.sharedInstance()?.uiDelegate = self
+        GIDSignIn.sharedInstance()?.delegate = self
+        
+        // Clear fields
         emailTextField.text = ""
         passwordTextField.text = ""
     }
@@ -64,7 +70,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // Login
+    // Login with Email
     @IBAction func loginTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
             displayWarningLabel(widthText: "Info is Incorrect")
@@ -76,6 +82,7 @@ class LoginViewController: UIViewController {
                 self?.displayWarningLabel(widthText: "Error occured")
                 return
             }
+            
             if user != nil {
                 self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
                 return
@@ -103,5 +110,42 @@ class LoginViewController: UIViewController {
             userRef?.setValue(["email": user?.user.email])
         }
     }
+    
+    // Login with Google
+    @IBAction func googleSignInTapped(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
 }
 
+extension LoginViewController: GIDSignInDelegate {
+    //Authenticate with Firebase (Google)
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        guard error == nil, user != nil else {
+            print(error!.localizedDescription)
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        
+        // Authenticate with Firebase using the credential
+        Auth.auth().signInAndRetrieveData(with: credential) { [weak self] result, error in
+            
+            if error != nil {
+                self?.displayWarningLabel(widthText: "Failed to sign in with error:")
+                return
+            }
+            
+            guard let uid = result?.user.uid else { return }
+            guard let email = result?.user.email else { return }
+            guard (result?.user.displayName) != nil else { return }
+            let userRef = self?.ref.child(uid)
+            userRef?.updateChildValues(["email": email])
+            self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
+            print("Sign in with Google")
+        }
+    }
+}
